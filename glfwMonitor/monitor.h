@@ -40,6 +40,7 @@ void Loop() {
 
     while (!glfwWindowShouldClose(window)) {
 
+        glfwGetWindowSize(window, &WINDOWSIZE_X, &WINDOWSIZE_Y);
         int count;
         int monitorxPosition, xWindowPosition;
         int monitoryPosition, yWindowPosition;
@@ -50,13 +51,12 @@ void Loop() {
             glfwGetMonitorPos(monitors[i], &monitorxPosition, &monitoryPosition);
             glfwGetWindowPos(doaWindow, &xWindowPosition, &yWindowPosition);
 
-            if (xWindowPosition > monitorxPosition - 100) focusedMonitor = monitors[i];
+            if (xWindowPosition + WINDOWSIZE_X/2 > monitorxPosition - 100) focusedMonitor = monitors[i];
         }
         const char* name = glfwGetMonitorName(focusedMonitor);
         isRetinaDisplay = std::string(name).find("Retina") != std::string::npos ? true : false;
         multipler = isRetinaDisplay == true ? 2 : 1;
-
-        glfwGetWindowSize(window, &WINDOWSIZE_X, &WINDOWSIZE_Y);
+        
         SetFramebufferSize();
     }
 }
