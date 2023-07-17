@@ -28,8 +28,8 @@ void SetFramebufferSize() {
         // Bind Framebuffer
         ...
         ...
-        ===>>>> glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, WINDOWSIZE_X*multiplier, WINDOWSIZE_Y*multiplier, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-        ===>>>> glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, WINDOWSIZE_X*multiplier, WINDOWSIZE_Y*multiplier);
+        ===>>>> glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, WINDOWSIZE_X*multiplier, WINDOWSIZE_Y*viewportMultipler, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+        ===>>>> glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, WINDOWSIZE_X*viewportMultipler, WINDOWSIZE_Y*multiplier);
         ...
 
         // Unbind Framebuffer
@@ -55,7 +55,7 @@ void Loop() {
         }
         const char* name = glfwGetMonitorName(focusedMonitor);
         isRetinaDisplay = std::string(name).find("Retina") != std::string::npos ? true : false;
-        multipler = isRetinaDisplay == true ? 2 : 1;
+        viewportMultipler = isRetinaDisplay == true ? 2 : 1;
         
         SetFramebufferSize();
     }
